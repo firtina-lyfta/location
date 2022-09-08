@@ -9,6 +9,7 @@ types
 build
 */build
 !packages/react-location/build/
+!packages/react-location/build/types
 packages/react-location/build/stats-html.html
 dist
 lib
