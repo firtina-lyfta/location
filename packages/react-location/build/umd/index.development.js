@@ -97,6 +97,7 @@
     var str = decodeURIComponent(mix);
     if (str === 'false') return false;
     if (str === 'true') return true;
+    if (str.charAt(0) === '0') return str;
     return +str * 0 === 0 ? +str : str;
   }
 
@@ -608,8 +609,8 @@
 
             const loaderReady = status => {
               this.updatedAt = Date.now();
-              resolveLoader(this.ownData);
               this.status = status;
+              resolveLoader(this.ownData);
             };
 
             const resolve = data => {
@@ -649,7 +650,10 @@
             }
           });
           return Promise.all([...elementPromises, dataPromise]).then(() => {
-            this.status = 'resolved';
+            if (!loader) {
+              this.status = 'resolved';
+            }
+
             this.isLoading = false;
             this.startPending = undefined;
           }).then(() => this.pendingMinPromise).then(() => {

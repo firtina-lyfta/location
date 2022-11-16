@@ -47,7 +47,7 @@ export declare type Route<TGenerics extends PartialGenerics = DefaultGenerics> =
         search: UseGeneric<TGenerics, 'Search'>;
     }) => Promise<RouteLoaders<TGenerics>>;
 };
-export declare type RouteLoaders<TGenerics> = {
+export declare type RouteLoaders<TGenerics extends PartialGenerics = DefaultGenerics> = {
     element?: SyncOrAsyncElement<TGenerics>;
     errorElement?: SyncOrAsyncElement<TGenerics>;
     pendingElement?: SyncOrAsyncElement<TGenerics>;
@@ -58,7 +58,7 @@ export declare type RouteLoaders<TGenerics> = {
     onTransition?: (match: RouteMatch<TGenerics>) => void;
     meta?: UseGeneric<TGenerics, 'RouteMeta'>;
 };
-export declare type SearchFilter<TGenerics> = (prev: UseGeneric<TGenerics, 'Search'>) => UseGeneric<TGenerics, 'Search'>;
+export declare type SearchFilter<TGenerics extends PartialGenerics = DefaultGenerics> = (prev: UseGeneric<TGenerics, 'Search'>) => UseGeneric<TGenerics, 'Search'>;
 export declare type MatchLocation<TGenerics extends PartialGenerics = DefaultGenerics> = {
     to?: string | number | null;
     search?: SearchPredicate<UseGeneric<TGenerics, 'Search'>>;
@@ -93,7 +93,7 @@ export declare type RouterProps<TGenerics extends PartialGenerics = DefaultGener
     children?: React.ReactNode;
     location: ReactLocation<TGenerics>;
 } & RouterOptions<TGenerics>;
-export declare type RouterOptions<TGenerics> = {
+export declare type RouterOptions<TGenerics extends PartialGenerics = DefaultGenerics> = {
     routes: Route<TGenerics>[];
     basepath?: string;
     filterRoutes?: FilterRoutesFn;
@@ -108,11 +108,11 @@ export declare type RouterOptions<TGenerics> = {
     caseSensitive?: boolean;
     __experimental__snapshot?: __Experimental__RouterSnapshot<TGenerics>;
 };
-export declare type __Experimental__RouterSnapshot<TGenerics> = {
+export declare type __Experimental__RouterSnapshot<TGenerics extends PartialGenerics = DefaultGenerics> = {
     location: Location<TGenerics>;
     matches: SnapshotRouteMatch<TGenerics>[];
 };
-export declare type SnapshotRouteMatch<TGenerics> = {
+export declare type SnapshotRouteMatch<TGenerics extends PartialGenerics = DefaultGenerics> = {
     id: string;
     ownData: UseGeneric<TGenerics, 'LoaderData'>;
 };
@@ -124,7 +124,7 @@ export declare type BuildNextOptions<TGenerics extends PartialGenerics = Default
     key?: string;
     __searchFilters?: SearchFilter<TGenerics>[];
 };
-export declare type NavigateOptions<TGenerics> = BuildNextOptions<TGenerics> & {
+export declare type NavigateOptions<TGenerics extends PartialGenerics = DefaultGenerics> = BuildNextOptions<TGenerics> & {
     replace?: boolean;
     fromCurrent?: boolean;
 };
@@ -165,8 +165,8 @@ export declare type LoaderDispatchEvent<TGenerics extends PartialGenerics = Defa
     type: 'reject';
     error: unknown;
 };
-export declare type LoadRouteFn<TGenerics> = (next: Location<TGenerics>) => MatchLoader<TGenerics>;
-export declare type TransitionState<TGenerics> = {
+export declare type LoadRouteFn<TGenerics extends PartialGenerics = DefaultGenerics> = (next: Location<TGenerics>) => MatchLoader<TGenerics>;
+export declare type TransitionState<TGenerics extends PartialGenerics = DefaultGenerics> = {
     location: Location<TGenerics>;
     matches: RouteMatch<TGenerics>[];
 };
@@ -201,13 +201,13 @@ export declare class ReactLocation<TGenerics extends PartialGenerics = DefaultGe
     navigate(next: Location<TGenerics>, replace?: boolean): void;
     parseLocation(location: History['location'], previousLocation?: Location<TGenerics>): Location<TGenerics>;
 }
-export declare type MatchesProviderProps<TGenerics> = {
+export declare type MatchesProviderProps<TGenerics extends PartialGenerics = DefaultGenerics> = {
     value: RouteMatch<TGenerics>[];
     children: React.ReactNode;
 };
-export declare function MatchesProvider<TGenerics>(props: MatchesProviderProps<TGenerics>): JSX.Element;
+export declare function MatchesProvider<TGenerics extends PartialGenerics = DefaultGenerics>(props: MatchesProviderProps<TGenerics>): JSX.Element;
 export declare function Router<TGenerics extends PartialGenerics = DefaultGenerics>({ children, location, __experimental__snapshot, ...rest }: RouterProps<TGenerics>): JSX.Element;
-declare type RouterInstanceState<TGenerics> = {
+declare type RouterInstanceState<TGenerics extends PartialGenerics = DefaultGenerics> = {
     state: TransitionState<TGenerics>;
     pending?: TransitionState<TGenerics>;
 };
@@ -296,7 +296,7 @@ declare class MatchLoader<TGenerics extends PartialGenerics = DefaultGenerics> e
 }
 export declare type UseRouterType<TGenerics extends PartialGenerics = DefaultGenerics> = () => RouterInstance<TGenerics>;
 export declare function useRouter<TGenerics extends PartialGenerics = DefaultGenerics>(): RouterInstance<TGenerics>;
-export interface MatchRoutesOptions<TGenerics> {
+export interface MatchRoutesOptions<TGenerics extends PartialGenerics = DefaultGenerics> {
     filterRoutes?: FilterRoutesFn;
     defaultPendingMs?: number;
     defaultPendingMinMs?: number;
@@ -333,7 +333,7 @@ export declare function useSearch<TGenerics extends PartialGenerics = DefaultGen
 export declare type MatchRouteType<TGenerics extends PartialGenerics = DefaultGenerics> = (currentLocation: Location<TGenerics>, matchLocation: MatchLocation<TGenerics>) => UseGeneric<TGenerics, 'Params'> | undefined;
 export declare function matchRoute<TGenerics extends PartialGenerics = DefaultGenerics>(currentLocation: Location<TGenerics>, matchLocation: MatchLocation<TGenerics>): UseGeneric<TGenerics, 'Params'> | undefined;
 export declare type UseMatchRouteType<TGenerics extends PartialGenerics = DefaultGenerics> = () => (matchLocation: MatchLocation<TGenerics>) => Maybe<TGenerics['Params'], Params<any>> | undefined;
-export declare type UseMatchRouteOptions<TGenerics> = MatchLocation<TGenerics> & {
+export declare type UseMatchRouteOptions<TGenerics extends PartialGenerics = DefaultGenerics> = MatchLocation<TGenerics> & {
     pending?: boolean;
 };
 export declare function useMatchRoute<TGenerics extends PartialGenerics = DefaultGenerics>(): (matchLocation: UseMatchRouteOptions<TGenerics>, opts?: {
